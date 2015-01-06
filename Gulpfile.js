@@ -1,23 +1,23 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
+var sass = require('gulp-ruby-sass');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var csslint = require('gulp-csslint');
 var jshint = require('gulp-jshint');
-var haml = require('gulp-haml');
+var haml = require('gulp-ruby-haml');
 
 var paths = {};
 
-paths.js = ['src/js/**/*'];
-paths.sass = ['src/sass/app.sass'];
-paths.haml = ['src/index.haml'];
+paths.js = 'src/js/**/*';
+paths.sass = 'src/sass/app.sass';
+paths.haml = 'src/index.haml';
 
 gulp.task('sass', function() {
   gulp.src(paths.sass)
       .pipe(sass())
+      .on('error', function (err) { console.log(err.message); })
       .pipe(csslint())
-      .pipe(rename('app.css'))
       .pipe(gulp.dest('dist/css'));
 });
 
